@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tmux training cheatsheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f5f4f0;
+    color: #1a1a18;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #6b6b66;
+    margin-bottom: 20px;
+  }
+  .tm-section { margin-bottom: 18px; }
+  .tm-section-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #6b6b66;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    padding-left: 2px;
+  }
+  .tm-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .tm-card {
+    background: #ffffff;
+    border: 0.5px solid rgba(0,0,0,0.12);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .tm-cmd {
+    font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    font-size: 12px;
+    color: #1a1a18;
+    margin: 0 0 4px;
+    white-space: pre;
+    line-height: 1.5;
+  }
+  .tm-desc {
+    font-size: 12px;
+    color: #6b6b66;
+    margin: 0;
+    line-height: 1.4;
+  }
+  .tm-key {
+    display: inline-block;
+    font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    font-size: 11px;
+    background: #f0efe9;
+    border: 0.5px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+  .tm-prefix {
+    background: #EEEDFE;
+    color: #3C3489;
+    border-color: #AFA9EC;
+  }
+  @media (max-width: 520px) {
+    .tm-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>tmux — training session cheatsheet</h1>
+<p class="subtitle">Prefix key is <span class="tm-key tm-prefix">Ctrl+B</span> — press it before every keyboard shortcut below</p>
+
+<div class="tm-section">
+  <div class="tm-section-label">Sessions</div>
+  <div class="tm-row">
+    <div class="tm-card">
+      <div class="tm-cmd">tmux new -s training</div>
+      <div class="tm-desc">Start a new named session</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd">tmux attach -t training</div>
+      <div class="tm-desc">Reattach to an existing session</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd">tmux ls</div>
+      <div class="tm-desc">List all active sessions</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd">tmux kill-session -t training</div>
+      <div class="tm-desc">Destroy a session and all its processes</div>
+    </div>
+  </div>
+</div>
+
+<div class="tm-section">
+  <div class="tm-section-label">Detach &amp; navigate (keyboard shortcuts)</div>
+  <div class="tm-row">
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then <span class="tm-key">d</span></div>
+      <div class="tm-desc">Detach — leaves session running, returns to normal shell</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then <span class="tm-key">c</span></div>
+      <div class="tm-desc">Create a new window in current session</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then <span class="tm-key">0</span>–<span class="tm-key">9</span></div>
+      <div class="tm-desc">Switch to window by number</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then <span class="tm-key">n</span> / <span class="tm-key">p</span></div>
+      <div class="tm-desc">Next / previous window</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then <span class="tm-key">%</span></div>
+      <div class="tm-desc">Split pane vertically</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then <span class="tm-key">"</span></div>
+      <div class="tm-desc">Split pane horizontally</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then arrow keys</div>
+      <div class="tm-desc">Move between split panes</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd"><span class="tm-key tm-prefix">Ctrl+B</span> then <span class="tm-key">[</span></div>
+      <div class="tm-desc">Scroll mode — use arrow keys, q to exit</div>
+    </div>
+  </div>
+</div>
+
+<div class="tm-section">
+  <div class="tm-section-label">Useful session flags</div>
+  <div class="tm-row">
+    <div class="tm-card">
+      <div class="tm-cmd">tmux attach -t training \
+  || tmux new -s training</div>
+      <div class="tm-desc">Attach if exists, else create — safe to put in a script</div>
+    </div>
+    <div class="tm-card">
+      <div class="tm-cmd">tmux send-keys -t training \
+  "python train.py" Enter</div>
+      <div class="tm-desc">Send a command to a session without attaching</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

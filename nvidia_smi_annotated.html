@@ -1,0 +1,54 @@
+<style>
+.smi-wrap { background: #1a1a1a; border-radius: var(--border-radius-lg); padding: 16px 18px; overflow-x: auto; margin-bottom: 16px; }
+.smi-line { font-family: var(--font-mono); font-size: 12px; color: #c8c8c0; line-height: 1.7; white-space: pre; margin: 0; }
+.smi-line .hi-gpu  { color: #5DCAA5; font-weight: 500; }
+.smi-line .hi-mem  { color: #F2A623; font-weight: 500; }
+.smi-line .hi-util { color: #7F77DD; font-weight: 500; }
+.smi-line .hi-temp { color: #F0997B; font-weight: 500; }
+.smi-line .hi-dim  { color: #666; }
+.ann-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.ann-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+.ann-label { font-size: 11px; font-weight: 500; margin: 0 0 3px; }
+.ann-desc  { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+</style>
+
+<h2 class="sr-only">Annotated nvidia-smi output explaining key fields</h2>
+
+<div class="smi-wrap">
+<p class="smi-line"><span class="hi-dim">+-----------------------------------------------------------------------------------------+</span></p>
+<p class="smi-line"><span class="hi-dim">| NVIDIA-SMI 535.104.05   Driver Version: 535.104.05   CUDA Version: 12.2              |</span></p>
+<p class="smi-line"><span class="hi-dim">+-------------------------------+----------------------+----------------------+</span></p>
+<p class="smi-line"><span class="hi-dim">| GPU  Name        Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |</span></p>
+<p class="smi-line"><span class="hi-dim">| Fan  Temp  Perf  Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |</span></p>
+<p class="smi-line"><span class="hi-dim">+-------------------------------+----------------------+----------------------+</span></p>
+<p class="smi-line"><span class="hi-dim">|   0  </span><span class="hi-gpu">NVIDIA A100-SXM4-80GB</span><span class="hi-dim">  On  | 00000000:00:04.0 Off |                    0 |</span></p>
+<p class="smi-line"><span class="hi-dim">| N/A  </span><span class="hi-temp">52C</span><span class="hi-dim">   P0   </span><span class="hi-temp">312W</span><span class="hi-dim"> / 400W  |  </span><span class="hi-mem">61432MiB / 81920MiB</span><span class="hi-dim">  |     </span><span class="hi-util">94%</span><span class="hi-dim">      Default |</span></p>
+<p class="smi-line"><span class="hi-dim">+-------------------------------+----------------------+----------------------+</span></p>
+<p class="smi-line"><span class="hi-dim">+-----------------------------------------------------------------------------------------+</span></p>
+<p class="smi-line"><span class="hi-dim">| Processes:                                                                              |</span></p>
+<p class="smi-line"><span class="hi-dim">|  GPU   GI   CI        PID   Type   Process name                        GPU Memory      |</span></p>
+<p class="smi-line"><span class="hi-dim">|        ID   ID                                                          Usage           |</span></p>
+<p class="smi-line"><span class="hi-dim">+-----------------------------------------------------------------------------------------+</span></p>
+<p class="smi-line"><span class="hi-dim">|    0   N/A  N/A     </span><span class="hi-util">48291</span><span class="hi-dim">      C   python train.py                    </span><span class="hi-mem">61420MiB</span><span class="hi-dim">      |</span></p>
+<p class="smi-line"><span class="hi-dim">+-----------------------------------------------------------------------------------------+</span></p>
+</div>
+
+<div class="ann-grid">
+  <div class="ann-card">
+    <div class="ann-label" style="color:#5DCAA5"><span class="dot" style="background:#5DCAA5"></span>GPU utilization — 94%</div>
+    <div class="ann-desc">How busy the GPU compute cores are. Target: 85–98% during training. Below 50% usually means a data loading bottleneck — your GPU is waiting on CPU.</div>
+  </div>
+  <div class="ann-card">
+    <div class="ann-label" style="color:#F2A623"><span class="dot" style="background:#F2A623"></span>Memory — 61432 / 81920 MiB</div>
+    <div class="ann-desc">VRAM used vs total. Getting close to the limit causes OOM crashes. If memory is maxed but utilization is low, you have a memory fragmentation or batch size issue.</div>
+  </div>
+  <div class="ann-card">
+    <div class="ann-label" style="color:#F0997B"><span class="dot" style="background:#F0997B"></span>Temperature — 52°C, 312W</div>
+    <div class="ann-desc">52°C is healthy for an A100 (safe up to ~83°C). Power draw of 312W/400W means the GPU isn't thermally throttling — it's running at near full power budget.</div>
+  </div>
+  <div class="ann-card">
+    <div class="ann-label" style="color:#7F77DD"><span class="dot" style="background:#7F77DD"></span>Perf state — P0</div>
+    <div class="ann-desc">P0 = maximum performance mode. P8 would mean idle/low power. During training you always want P0. If you see P2–P8, the GPU may be throttling due to thermals or power limits.</div>
+  </div>
+</div>

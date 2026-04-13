@@ -1,0 +1,275 @@
+{
+  "main": {
+    "id": "40f98434f60d12f2",
+    "type": "split",
+    "children": [
+      {
+        "id": "211959813d213b27",
+        "type": "tabs",
+        "dimension": 50.63761955366631,
+        "children": [
+          {
+            "id": "215c9bf295832f37",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "ffc50caf40bcc422",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Model compression - quantization, pruning, distillation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Model compression - quantization, pruning, distillation"
+            }
+          },
+          {
+            "id": "cd2e38ba8aac5ef6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ai_engineering_security_guide.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ai_engineering_security_guide"
+            }
+          }
+        ]
+      },
+      {
+        "id": "4144a9f91c8eabb1",
+        "type": "tabs",
+        "dimension": 49.36238044633369,
+        "children": [
+          {
+            "id": "21752ff892ef0deb",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7bb386dfb43d9b1c",
+    "type": "split",
+    "children": [
+      {
+        "id": "f42b41cdd2922a6e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0243956d707d4119",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "5436eb869d704089",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "0757f9415c54eae4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 484.5
+  },
+  "right": {
+    "id": "b229775011a41326",
+    "type": "split",
+    "children": [
+      {
+        "id": "217c39d25ad550c4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "857c7c8d37a9235b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "AAA Basic AI Engineering Skills.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for AAA Basic AI Engineering Skills"
+            }
+          },
+          {
+            "id": "92669a80619cc2d3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "AAA Basic AI Engineering Skills.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from AAA Basic AI Engineering Skills"
+            }
+          },
+          {
+            "id": "146c4ba1ba85d8aa",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "5012fbdbe3cad7b5",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "296adc3cd9f10ba8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "AAA Basic AI Engineering Skills.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of AAA Basic AI Engineering Skills"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "215c9bf295832f37",
+  "lastOpenFiles": [
+    "README.md",
+    "index.md",
+    "Context Engineering.md",
+    "Probabilistic graphical models (for structured prediction).md",
+    "ChromaDB with OpenTelemetry and Zipkin.md",
+    "AAA Basic AI Engineering Skills.md",
+    "ai-python-environment-guide.md",
+    "vectorless-rag-comprehensive-report.md",
+    "Specification Engineering.md",
+    "Intent Engineering.md",
+    "Structuring effective prompts.md",
+    "Python programming.md",
+    "20 percent core skills.md",
+    "Batch vs. online inference strategies.md",
+    "Context construction patterns.md",
+    "Tokenization.md",
+    "secrets-management-guide.md",
+    "ai_engineering_security_guide.md",
+    "Basic statistics and probability.md",
+    "ai_research_trend_tools_report.md",
+    "Commercial LLM API Comparison.md",
+    "Claude Code for AI Engineers.md",
+    "Common algorithms at a high level.md",
+    "ai_engineer_cli_workflow.svg",
+    "Data structures and algorithms fundamentals.md",
+    "Understanding of numerical precision formats.md",
+    "numerical_precision_formats_overview.svg",
+    "Continuous improvement cycles.md",
+    "optimizer_comparison_paths.svg",
+    "gradient_descent_loss_surface.svg",
+    "linear_algebra_ai_map.svg",
+    "stats_probability_ai_engineering_map.svg",
+    "deep_learning_landscape.svg",
+    "eval_pipeline_curl_rsync.svg",
+    "nvidia_smi_annotated.html",
+    "tmux_training_cheatsheet.html",
+    "grep_sed_awk_pipeline.svg",
+    "jq_cheatsheet_ai_datasets.html",
+    "transformer_variants_comparison.svg",
+    "Secure sandboxing (for agents"
+  ]
+}

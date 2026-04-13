@@ -1,0 +1,98 @@
+<style>
+.jq-grid { display: grid; gap: 10px; padding: 4px 0; }
+.jq-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px 16px; }
+.jq-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 6px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.jq-cmd { font-family: var(--font-mono); font-size: 12.5px; color: var(--color-text-primary); background: var(--color-background-tertiary); border-radius: var(--border-radius-md); padding: 8px 12px; white-space: pre; overflow-x: auto; margin: 0 0 6px; line-height: 1.6; }
+.jq-desc { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+.jq-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-bottom: 8px; }
+.tag-inspect { background: #E1F5EE; color: #085041; }
+.tag-filter  { background: #EEEDFE; color: #3C3489; }
+.tag-reshape { background: #FAEEDA; color: #633806; }
+</style>
+
+<h2 class="sr-only">jq command reference for AI dataset inspection</h2>
+
+<div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 12px; padding-top: 4px;">
+  Common patterns for JSONL fine-tuning data and API response files
+</div>
+
+<div class="jq-grid">
+
+  <div class="jq-card">
+    <div class="jq-tag tag-inspect">inspect</div>
+    <div class="jq-label">View the keys of one record</div>
+    <div class="jq-cmd">head -n 1 dataset.jsonl | jq 'keys'</div>
+    <div class="jq-desc">Shows field names in the first record — essential first step on any unknown dataset.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-inspect">inspect</div>
+    <div class="jq-label">Pretty-print a single record</div>
+    <div class="jq-cmd">head -n 1 finetune.jsonl | jq '.'</div>
+    <div class="jq-desc">Formats the raw JSON with indentation and color — much easier to read than raw JSONL.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-inspect">inspect</div>
+    <div class="jq-label">Extract one field from every record</div>
+    <div class="jq-cmd">jq -r '.prompt' dataset.jsonl | head -20</div>
+    <div class="jq-desc">-r gives raw strings (no quotes). Swap .prompt for any field name.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-inspect">inspect</div>
+    <div class="jq-label">Check message structure (chat format)</div>
+    <div class="jq-cmd">head -n 1 chat_data.jsonl | jq '.messages[] | {role, content: .content[:80]}'</div>
+    <div class="jq-desc">Previews each message's role and first 80 chars — useful for OpenAI/Anthropic fine-tune formats.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-filter">filter</div>
+    <div class="jq-label">Filter records by field value</div>
+    <div class="jq-cmd">jq 'select(.label == "toxic")' dataset.jsonl | wc -l</div>
+    <div class="jq-desc">Count how many examples have a specific label — great for checking class balance.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-filter">filter</div>
+    <div class="jq-label">Filter by string length (find short responses)</div>
+    <div class="jq-cmd">jq 'select((.completion | length) < 20)' dataset.jsonl | head -5 | jq '.'</div>
+    <div class="jq-desc">Surface potentially bad examples — very short completions often signal labeling errors.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-filter">filter</div>
+    <div class="jq-label">Find records missing a field</div>
+    <div class="jq-cmd">jq 'select(.completion == null or .completion == "")' dataset.jsonl | wc -l</div>
+    <div class="jq-desc">Counts incomplete records before training — catches data pipeline issues early.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-reshape">reshape</div>
+    <div class="jq-label">Extract unique label values</div>
+    <div class="jq-cmd">jq -r '.label' dataset.jsonl | sort -u</div>
+    <div class="jq-desc">Lists every distinct label in your dataset — verify your classes match expectations.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-reshape">reshape</div>
+    <div class="jq-label">Count label distribution</div>
+    <div class="jq-cmd">jq -r '.label' dataset.jsonl | sort | uniq -c | sort -rn</div>
+    <div class="jq-desc">Shows label frequencies, sorted by count — instant class imbalance check.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-reshape">reshape</div>
+    <div class="jq-label">Convert array JSON to JSONL</div>
+    <div class="jq-cmd">jq -c '.[]' dataset.json > dataset.jsonl</div>
+    <div class="jq-desc">-c outputs compact (one record per line). Most training frameworks expect JSONL.</div>
+  </div>
+
+  <div class="jq-card">
+    <div class="jq-tag tag-reshape">reshape</div>
+    <div class="jq-label">Reformat fields for fine-tuning</div>
+    <div class="jq-cmd">jq -c '{prompt: .input, completion: .output}' old.jsonl > ft.jsonl</div>
+    <div class="jq-desc">Renames fields to match your training framework's expected schema.</div>
+  </div>
+
+</div>
